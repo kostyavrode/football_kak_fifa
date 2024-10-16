@@ -57,7 +57,8 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.States.Entities.PlayerStates.
                 {
                     // find the rotation
                     float turnSpeed = 1.5f * Time.deltaTime;
-                    float rotate = Input.GetAxis("Horizontal") * turnSpeed;
+                    //float rotate = Input.GetAxis("Horizontal") * turnSpeed;
+                    float rotate = MobileInput.instance.GetAxisHorizontal() * turnSpeed;
 
                     // calculate the direction
                     Vector3 dir = Camera.main.transform.forward * rotate;
