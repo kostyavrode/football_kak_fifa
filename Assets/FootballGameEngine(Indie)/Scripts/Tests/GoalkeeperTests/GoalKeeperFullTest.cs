@@ -1,19 +1,27 @@
 ﻿using Assets.FootballGameEngine_Indie.Scripts.Entities;
 using Assets.FootballGameEngine_Indie_.Scripts.Entities;
+using System;
 using UnityEngine;
 
 namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
 {
     public class GoalKeeperFullTest : MonoBehaviour
     {
+        public static Action onGoalScored;
+
         [SerializeField]
         float _power = 15;
         private bool isShotted;
         [SerializeField]
         Player _goalKeeper;
 
+        private bool isGoalScored;
+
         public float timeBeforeEnd;
         public float timeBeforeStart;
+
+        public GameObject scoredCanvas;
+        public GameObject loseCanvas;
         private void Awake()
         {
             //// inti the goalkeeper
@@ -56,10 +64,14 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
 
             // enable tje keeper
             _goalKeeper.gameObject.SetActive(true);
-
+            onGoalScored += GoalScored;
             //Invoke("OnInstructedToWait", 1f);
+            
         }
-
+        private void OnDisable()
+        {
+            onGoalScored -= GoalScored;
+        }
         private void Update()
         {
             if(Input.GetMouseButtonDown(0) && !isShotted)
@@ -86,6 +98,7 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
 
                     _goalKeeper.Invoke_OnShotTaken(shot);
                     isShotted = true;
+                    Invoke("CheckIsGoalScored", 5);
                     //_goalKeeper.Invoke_OnShotTaken(flightTime,
                     //    _power,
                     //    Ball.Instance.Position,
@@ -100,7 +113,24 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
             if (Input.GetKeyDown(KeyCode.P))
                 _goalKeeper.Invoke_OnInstructedToPutBallBackIntoPlay();
         }
+        private void GoalScored()
+        {
+            isGoalScored = true;
+        }
 
+        private void CheckIsGoalScored()
+        {
+            if (isGoalScored)
+            {
+                Debug.Log("Win");
+                scoredCanvas.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("Lose");
+                loseCanvas.SetActive(true);
+            }
+        }
         private void OnInstructedToWait()
         {
             // go to tend goal state

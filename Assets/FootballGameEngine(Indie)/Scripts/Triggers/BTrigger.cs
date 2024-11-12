@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests;
+using System;
 using UnityEngine;
 
 namespace Assets.FootballGameEngine_Indie_.Scripts.Triggers
@@ -11,7 +12,8 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Triggers
         {
             if (other.tag == "Ball")
             {
-                Debug.Log("Goal");
+                Debug.Log("Scored goal");
+                GoalKeeperFullTest.onGoalScored?.Invoke();
                 //invoke that the wall has collided with the ball
                 Action temp = OnCollidedWithBall;
                 if (temp != null)
