@@ -11,6 +11,7 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Triggers
         {
             if (other.tag == "Ball")
             {
+                Debug.Log("Goal");
                 //invoke that the wall has collided with the ball
                 Action temp = OnCollidedWithBall;
                 if (temp != null)

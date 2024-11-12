@@ -8,10 +8,12 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
     {
         [SerializeField]
         float _power = 15;
-
+        private bool isShotted;
         [SerializeField]
         Player _goalKeeper;
 
+        public float timeBeforeEnd;
+        public float timeBeforeStart;
         private void Awake()
         {
             //// inti the goalkeeper
@@ -55,12 +57,12 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
             // enable tje keeper
             _goalKeeper.gameObject.SetActive(true);
 
-            Invoke("OnInstructedToWait", 1f);
+            //Invoke("OnInstructedToWait", 1f);
         }
 
         private void Update()
         {
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButtonDown(0) && !isShotted)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
@@ -83,7 +85,7 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
                     };
 
                     _goalKeeper.Invoke_OnShotTaken(shot);
-
+                    isShotted = true;
                     //_goalKeeper.Invoke_OnShotTaken(flightTime,
                     //    _power,
                     //    Ball.Instance.Position,
@@ -95,8 +97,8 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Tests.GoalkeeperTests
                 }
             }
 
-            //if (Input.GetKeyDown(KeyCode.P))
-            //    _goalKeeper.Invoke_OnInstructedToPutBallBackIntoPlay();
+            if (Input.GetKeyDown(KeyCode.P))
+                _goalKeeper.Invoke_OnInstructedToPutBallBackIntoPlay();
         }
 
         private void OnInstructedToWait()

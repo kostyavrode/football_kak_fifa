@@ -238,7 +238,7 @@ namespace RobustFSM.Base
             //if no name hase been specified set the name of this instance to the the
             if (String.IsNullOrEmpty(MachineName))
                 MachineName = GetType().Name;
-
+            Debug.Log("Init");
             //add the states
             AddStates();
 

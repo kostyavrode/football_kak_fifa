@@ -36,6 +36,7 @@ namespace Assets.FootballGameEngine_Indie.Scripts.States.Entities.PlayerStates.G
         public override void Enter()
         {
             base.Enter();
+            
 
             //set the animator
             Owner.Animator.SetTrigger("TendGoal");
@@ -160,7 +161,6 @@ namespace Assets.FootballGameEngine_Indie.Scripts.States.Entities.PlayerStates.G
         {
             // get the direction to target
             Vector3 direction = shot.ToPosition - shot.FromPosition;
-           
             // make a raycast and test if it hits a goal
             RaycastHit hitInfo;
             bool willBallHitAGoal = Physics.SphereCast(shot.FromPosition + Vector3.up * Ball.Instance.SphereCollider.radius,
@@ -175,7 +175,7 @@ namespace Assets.FootballGameEngine_Indie.Scripts.States.Entities.PlayerStates.G
             {
                 // get the goal
                 GoalTrigger goalTrigger = hitInfo.transform.GetComponent<GoalTrigger>();
-                Goal goal = goalTrigger.Goal;
+                Goal goal = goalTrigger.Goal;       
 
                 // check if shot is on target
                 bool isShotOnTarget = goal == Owner.TeamGoal;
