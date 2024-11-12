@@ -11,7 +11,24 @@ namespace Assets.FootballGameEngine_Indie_.Scripts.Utilities.Misc
     {
         private void Awake()
         {
-            DontDestroyOnLoad(this);
+            try
+            {
+                DontDestroyOnLoad(this);
+                //GameObject.FindGameObjectWithTag("Pers").SetActive(true);
+                //Destroy(this.gameObject);
+            }
+            catch
+            {
+                
+            }
+        }
+        private void OnLevelWasLoaded(int level)
+        {
+            if (level == 2)
+            {
+                Debug.Log("Load penalty and destroy");
+                Destroy(this.gameObject);
+            }
         }
     }
 }

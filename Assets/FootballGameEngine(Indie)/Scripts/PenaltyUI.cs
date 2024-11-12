@@ -8,7 +8,10 @@ public class PenaltyUI : MonoBehaviour
 
     public void GoHome()
     {
+        //GameObject.FindGameObjectWithTag("Pers").SetActive(true);
+        //Destroy(GameObject.FindGameObjectWithTag("Pers").gameObject);
         SceneManager.LoadScene("MainScene");
+        
     }
     public void RestartScene()
     {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ball
   - Audio
+  - Ground
+  - Pers
   layers:
   - Default
   - TransparentFX
